@@ -600,14 +600,14 @@
       <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')" data-i="login">Login</button>
       <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')" data-i="register">Register</button>
     </div>
-    <!-- Username field - only on register -->
+    <!-- Name field - only on register -->
     <div id="register-name-field" class="field" style="display:none">
       <label data-i="uname_label">KULLANICI ADI</label>
-      <input type="text" id="auth-name" placeholder="ornekkullanici" autocomplete="username" style="width:100%;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      <input type="text" id="auth-name" placeholder="Ali Yılmaz" autocomplete="name" style="width:100%;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
     </div>
     <div class="field">
-      <label data-i="login_input_label">EMAIL OR USERNAME</label>
-      <input type="text" id="auth-user" placeholder="you@example.com or username" autocomplete="username" style="width:100%;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      <label data-i="email_label">EMAIL</label>
+      <input type="text" id="auth-user" placeholder="you@example.com" autocomplete="email" style="width:100%;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
     </div>
     <div class="field">
       <label data-i="password_label">PASSWORD</label>
@@ -719,13 +719,13 @@
       </div>
     </div>
 
-    <!-- Change Username -->
+    <!-- Change Username (displayName) -->
     <div class="settings-section">
       <h3 data-i="change_uname_section">🔖 Kullanıcı Adı Değiştir</h3>
       <div class="settings-row">
         <div class="field">
           <label data-i="new_uname_label">YENİ KULLANICI ADI</label>
-          <input type="text" id="new-uname" autocomplete="off" placeholder="ornekkullanici" style="width:100%;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
+          <input type="text" id="new-uname" autocomplete="off" style="width:100%;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
         </div>
         <button class="btn sm" onclick="changeUname()" data-i="save">Kaydet</button>
       </div>
@@ -1573,32 +1573,15 @@ async function authAction() {
   btn.textContent = t('loading'); btn.disabled = true;
   try {
     if (authMode === 'register') {
-      if (!name) { errEl.textContent = t('err_uname_required'); return; }
-      if (!/^[a-zA-Z0-9_]+$/.test(name)) { errEl.textContent = t('err_uname_format'); return; }
+      if (!name) { errEl.textContent = t('err_fill'); return; }
       if (pass !== pass2) { errEl.textContent = t('err_pass_match'); return; }
       if (pass.length < 6) { errEl.textContent = t('err_short'); return; }
       const termsChecked = document.getElementById('terms-checkbox')?.checked;
       if (!termsChecked) { errEl.textContent = t('terms_accept'); return; }
-      // Username must be email on register
-      if (!input.includes('@')) { errEl.textContent = t('err_invalid_email'); return; }
       const cred = await createUserWithEmailAndPassword(auth, input, pass);
-      // Check username uniqueness before saving
-      const uname = name.toLowerCase();
-      const unameSnap = await getDoc(doc(db, `usernames/${uname}`));
-      if (unameSnap.exists()) { errEl.textContent = t('err_uname_taken'); await deleteUser(cred.user); return; }
       await updateProfile(cred.user, { displayName: name });
-      await setDoc(doc(db, `usernames/${uname}`), { email: input, uid: cred.user.uid });
     } else {
-      // Login: check if input is email or username
-      let email = input;
-      if (!input.includes('@')) {
-        // Lookup username
-        const uname = input.toLowerCase().replace(/\s+/g, '');
-        const snap = await getDoc(doc(db, `usernames/${uname}`));
-        if (!snap.exists()) { errEl.textContent = t('err_not_found'); return; }
-        email = snap.data().email;
-      }
-      await signInWithEmailAndPassword(auth, email, pass);
+      await signInWithEmailAndPassword(auth, input, pass);
     }
   } catch(e) {
     const msg = {
@@ -2377,17 +2360,10 @@ function checkOverdueBanner(){
 //  SETTINGS
 // ══════════════════════════════════════════
 async function changeUname(){
-  const newUname = document.getElementById('new-uname').value.trim().toLowerCase();
+  const newUname = document.getElementById('new-uname').value.trim();
   const msg = document.getElementById('msg-uname');
   if(!newUname){setMsg(msg,t('err_fill'),false);return;}
-  if(!/^[a-zA-Z0-9_]+$/.test(newUname)){setMsg(msg,t('err_uname_format'),false);return;}
   try{
-    const snap = await getDoc(doc(db,`usernames/${newUname}`));
-    if(snap.exists()&&snap.data().uid!==currentUser.uid){setMsg(msg,t('err_uname_taken'),false);return;}
-    const meta = await getUserMeta();
-    if(meta.username) await deleteDoc(doc(db,`usernames/${meta.username}`));
-    await setDoc(doc(db,`usernames/${newUname}`),{email:currentUser.email,uid:currentUser.uid});
-    await setUserMeta({username:newUname});
     await updateProfile(currentUser,{displayName:newUname});
     currentDisplayName=newUname;
     document.getElementById('topbar-username').textContent='/ '+currentDisplayName;
