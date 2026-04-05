@@ -600,10 +600,10 @@
       <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')" data-i="login">Login</button>
       <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')" data-i="register">Register</button>
     </div>
-    <!-- Name field - only on register -->
+    <!-- Username field - only on register -->
     <div id="register-name-field" class="field" style="display:none">
-      <label data-i="name_label">FULL NAME</label>
-      <input type="text" id="auth-name" placeholder="John Doe" autocomplete="name" style="width:100%;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      <label data-i="uname_label">KULLANICI ADI</label>
+      <input type="text" id="auth-name" placeholder="ornekkullanici" autocomplete="username" style="width:100%;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
     </div>
     <div class="field">
       <label data-i="login_input_label">EMAIL OR USERNAME</label>
@@ -717,19 +717,6 @@
         <button class="lang-btn" id="lang-tr" onclick="setLang('tr')">🇹🇷 Türkçe</button>
         <button class="lang-btn" id="lang-en" onclick="setLang('en')">🇬🇧 English</button>
       </div>
-    </div>
-
-    <!-- Change Name -->
-    <div class="settings-section">
-      <h3 data-i="change_name_section">👤 İsim Değiştir</h3>
-      <div class="settings-row">
-        <div class="field">
-          <label data-i="new_name_label">YENİ İSİM</label>
-          <input type="text" id="new-display-name" autocomplete="off" style="width:100%;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
-        </div>
-        <button class="btn sm" onclick="changeDisplayName()" data-i="save">Kaydet</button>
-      </div>
-      <div class="settings-msg" id="msg-displayname"></div>
     </div>
 
     <!-- Change Username -->
@@ -1269,14 +1256,13 @@ const LANG = {
     err_short:'Şifre en az 6 karakter olmalı.', err_user_exists:'Bu email zaten kayıtlı.',
     err_not_found:'Kullanıcı bulunamadı.', err_wrong_pass:'Şifre yanlış.',
     err_vault_wrong:'Kasa şifresi yanlış.', err_note_wrong:'Not şifresi yanlış.',
-    err_confirm_pass:'Mevcut şifre gerekli.', err_name:'İsim zorunludur.',
+    err_confirm_pass:'Mevcut şifre gerekli.', err_uname_required:'Kullanıcı adı zorunludur.',
     err_invalid_email:'Geçersiz email formatı.', err_too_many:'Çok fazla deneme. Biraz bekle.',
-    ok_username:'Email güncellendi.', ok_pass:'Şifre güncellendi.', ok_vault_pass:'Kasa şifresi güncellendi.', ok_name:'İsim güncellendi.',
+    ok_username:'Email güncellendi.', ok_pass:'Şifre güncellendi.', ok_vault_pass:'Kasa şifresi güncellendi.', ok_uname:'Kullanıcı adı güncellendi.',
     confirm_delete:'Tüm veriler silinecek. Emin misin?',
     copied:'✅ Kopyalandı!', note_pass_required:'Şifre zorunlu.',
     err_username_taken:'Bu email alınmış.', loading:'Yükleniyor...',
-    name_label:'İSİM', email_label:'EMAIL', login_input_label:'EMAIL VEYA KULLANICI ADI',
-    change_name_section:'👤 İsim Değiştir', new_name_label:'YENİ İSİM',
+    uname_label:'KULLANICI ADI', email_label:'EMAIL', login_input_label:'EMAIL VEYA KULLANICI ADI',
     change_uname_section:'🔖 Kullanıcı Adı Değiştir', new_uname_label:'YENİ KULLANICI ADI',
     ok_uname:'Kullanıcı adı güncellendi.',
     err_uname_taken:'Bu kullanıcı adı zaten alınmış.',
@@ -1345,16 +1331,14 @@ const LANG = {
     err_short:'Password must be at least 6 characters.', err_user_exists:'Email already in use.',
     err_not_found:'User not found.', err_wrong_pass:'Wrong password.',
     err_vault_wrong:'Wrong vault password.', err_note_wrong:'Wrong note password.',
-    err_confirm_pass:'Current password required.', err_name:'Name is required.',
+    err_confirm_pass:'Current password required.', err_uname_required:'Username is required.',
     err_invalid_email:'Invalid email format.', err_too_many:'Too many attempts. Please wait.',
-    ok_username:'Email updated.', ok_pass:'Password updated.', ok_vault_pass:'Vault password updated.', ok_name:'Name updated.',
+    ok_username:'Email updated.', ok_pass:'Password updated.', ok_vault_pass:'Vault password updated.', ok_uname:'Username updated.',
     confirm_delete:'All data will be deleted. Are you sure?',
     copied:'✅ Copied!', note_pass_required:'Password required.',
     err_username_taken:'Email already taken.', loading:'Loading...',
-    name_label:'FULL NAME', email_label:'EMAIL', login_input_label:'EMAIL OR USERNAME',
-    change_name_section:'👤 Change Name', new_name_label:'NEW NAME',
+    uname_label:'USERNAME', email_label:'EMAIL', login_input_label:'EMAIL OR USERNAME',
     change_uname_section:'🔖 Change Username', new_uname_label:'NEW USERNAME',
-    ok_uname:'Username updated.',
     err_uname_taken:'This username is already taken.',
     err_uname_format:'Only letters, numbers and _ allowed.',
     // Pro / upgrade
@@ -1589,7 +1573,8 @@ async function authAction() {
   btn.textContent = t('loading'); btn.disabled = true;
   try {
     if (authMode === 'register') {
-      if (!name) { errEl.textContent = t('err_name'); return; }
+      if (!name) { errEl.textContent = t('err_uname_required'); return; }
+      if (!/^[a-zA-Z0-9_]+$/.test(name)) { errEl.textContent = t('err_uname_format'); return; }
       if (pass !== pass2) { errEl.textContent = t('err_pass_match'); return; }
       if (pass.length < 6) { errEl.textContent = t('err_short'); return; }
       const termsChecked = document.getElementById('terms-checkbox')?.checked;
@@ -1597,9 +1582,11 @@ async function authAction() {
       // Username must be email on register
       if (!input.includes('@')) { errEl.textContent = t('err_invalid_email'); return; }
       const cred = await createUserWithEmailAndPassword(auth, input, pass);
+      // Check username uniqueness before saving
+      const uname = name.toLowerCase();
+      const unameSnap = await getDoc(doc(db, `usernames/${uname}`));
+      if (unameSnap.exists()) { errEl.textContent = t('err_uname_taken'); await deleteUser(cred.user); return; }
       await updateProfile(cred.user, { displayName: name });
-      // Save username → email mapping (username = name lowercased, no spaces)
-      const uname = name.toLowerCase().replace(/\s+/g, '');
       await setDoc(doc(db, `usernames/${uname}`), { email: input, uid: cred.user.uid });
     } else {
       // Login: check if input is email or username
@@ -2389,36 +2376,21 @@ function checkOverdueBanner(){
 // ══════════════════════════════════════════
 //  SETTINGS
 // ══════════════════════════════════════════
-async function changeDisplayName(){
-  const newName=document.getElementById('new-display-name').value.trim();
-  const msg=document.getElementById('msg-displayname');
-  if(!newName){setMsg(msg,t('err_fill'),false);return;}
-  try{
-    await updateProfile(currentUser,{displayName:newName});
-    currentDisplayName=newName;
-    document.getElementById('topbar-username').textContent='/ '+currentDisplayName;
-    document.getElementById('new-display-name').value='';
-    setMsg(msg,t('ok_name'),true);
-  }catch(e){setMsg(msg,e.message,false);}
-}
-
 async function changeUname(){
-  const newUname = document.getElementById('new-uname').value.trim().toLowerCase().replace(/\s+/g,'');
+  const newUname = document.getElementById('new-uname').value.trim().toLowerCase();
   const msg = document.getElementById('msg-uname');
   if(!newUname){setMsg(msg,t('err_fill'),false);return;}
-  if(!/^[a-z0-9_]+$/.test(newUname)){setMsg(msg,t('err_uname_format'),false);return;}
+  if(!/^[a-zA-Z0-9_]+$/.test(newUname)){setMsg(msg,t('err_uname_format'),false);return;}
   try{
-    // Check if taken
     const snap = await getDoc(doc(db,`usernames/${newUname}`));
     if(snap.exists()&&snap.data().uid!==currentUser.uid){setMsg(msg,t('err_uname_taken'),false);return;}
-    // Delete old username entry if exists
     const meta = await getUserMeta();
-    if(meta.username){
-      await deleteDoc(doc(db,`usernames/${meta.username}`));
-    }
-    // Save new username
+    if(meta.username) await deleteDoc(doc(db,`usernames/${meta.username}`));
     await setDoc(doc(db,`usernames/${newUname}`),{email:currentUser.email,uid:currentUser.uid});
     await setUserMeta({username:newUname});
+    await updateProfile(currentUser,{displayName:newUname});
+    currentDisplayName=newUname;
+    document.getElementById('topbar-username').textContent='/ '+currentDisplayName;
     document.getElementById('new-uname').value='';
     setMsg(msg,t('ok_uname'),true);
   }catch(e){setMsg(msg,e.message,false);}
@@ -2515,7 +2487,7 @@ Object.assign(window,{
   openTaskModal,closeTaskModal,saveTask,editTask,deleteTask,
   toggleTaskDone,toggleSubtask,taskDragStart,taskDrop,
   setChip,renderTagSelector,toggleTag,addCustomTag,addSubtask,removeSubtask,renderSubtaskEditor,
-  changeDisplayName,changeUname,changeUsername,changeMasterPass,changeVaultPass,deleteAccount,
+  changeUname,changeUsername,changeMasterPass,changeVaultPass,deleteAccount,
   setLang,toggleEye,copyText,renderTasks,renderNotes,renderPwds,
   openUpgradeModal,closeUpgradeModal,selectPlan,startCheckout,
 });
