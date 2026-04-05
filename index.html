@@ -595,40 +595,45 @@
 <div id="auth-screen">
   <div class="auth-box">
     <div class="auth-logo">🔐 <span>VAULT</span></div>
-    <div class="auth-sub" id="auth-sub-text">// kişisel veri kasası</div>
+    <div class="auth-sub" id="auth-sub-text">// personal data vault</div>
     <div class="auth-tabs">
-      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')" data-i="login">Giriş Yap</button>
-      <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')" data-i="register">Kayıt Ol</button>
+      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')" data-i="login">Login</button>
+      <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')" data-i="register">Register</button>
+    </div>
+    <!-- Name field - only on register -->
+    <div id="register-name-field" class="field" style="display:none">
+      <label data-i="name_label">FULL NAME</label>
+      <input type="text" id="auth-name" placeholder="John Doe" autocomplete="name" style="width:100%;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
     </div>
     <div class="field">
-      <label data-i="username_label">KULLANICI ADI</label>
-      <input type="text" id="auth-user" placeholder='kullanıcı adı (boş = "vault")' autocomplete="off" style="width:100%;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      <label data-i="login_input_label">EMAIL OR USERNAME</label>
+      <input type="text" id="auth-user" placeholder="you@example.com or username" autocomplete="username" style="width:100%;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
     </div>
     <div class="field">
-      <label data-i="password_label">ŞİFRE</label>
+      <label data-i="password_label">PASSWORD</label>
       <div class="input-wrap">
-        <input type="password" id="auth-pass" placeholder="şifre">
+        <input type="password" id="auth-pass" placeholder="••••••••" autocomplete="current-password">
         <button class="eye-btn" onclick="toggleEye('auth-pass',this)">👁️</button>
       </div>
     </div>
     <div id="register-confirm-field" class="field" style="display:none">
-      <label data-i="confirm_label">ŞİFRE TEKRAR</label>
+      <label data-i="confirm_label">CONFIRM PASSWORD</label>
       <div class="input-wrap">
-        <input type="password" id="auth-pass2" placeholder="şifre tekrar">
+        <input type="password" id="auth-pass2" placeholder="••••••••" autocomplete="new-password">
         <button class="eye-btn" onclick="toggleEye('auth-pass2',this)">👁️</button>
       </div>
     </div>
-    <!-- Terms checkbox - only shown on register -->
+    <!-- Terms checkbox - only on register -->
     <div id="register-terms-field" style="display:none;margin-bottom:14px">
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:var(--text2);line-height:1.5">
         <input type="checkbox" id="terms-checkbox" style="margin-top:3px;accent-color:var(--accent);flex-shrink:0">
-        <span>
-          <a href="/terms" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600">Kullanım Şartları</a>'nı ve
-          <a href="/privacy" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600">Gizlilik Politikası</a>'nı okudum, kabul ediyorum.
+        <span id="terms-label-text">
+          <a href="/terms" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600">Terms of Service</a> and
+          <a href="/privacy" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600">Privacy Policy</a> — I have read and agree.
         </span>
       </label>
     </div>
-    <button class="btn" id="auth-btn" onclick="authAction()">Giriş Yap</button>
+    <button class="btn" id="auth-btn" onclick="authAction()">Login</button>
     <div class="auth-err" id="auth-err"></div>
   </div>
 </div>
@@ -699,7 +704,7 @@
 
     <!-- Pro Status -->
     <div class="settings-section" id="pro-status-section">
-      <h3>💳 Planı Yükselt</h3>
+      <h3 id="plan-section-title">💳 Planı Yükselt</h3>
       <div id="pro-status-content">
         <!-- filled by updateProUI -->
       </div>
@@ -714,13 +719,39 @@
       </div>
     </div>
 
-    <!-- Change Username -->
+    <!-- Change Name -->
     <div class="settings-section">
-      <h3 data-i="change_username_section">👤 Kullanıcı Adını Değiştir</h3>
+      <h3 data-i="change_name_section">👤 İsim Değiştir</h3>
       <div class="settings-row">
         <div class="field">
-          <label data-i="new_username_label">YENİ KULLANICI ADI</label>
-          <input type="text" id="new-username" autocomplete="off" style="width:100%;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
+          <label data-i="new_name_label">YENİ İSİM</label>
+          <input type="text" id="new-display-name" autocomplete="off" style="width:100%;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
+        </div>
+        <button class="btn sm" onclick="changeDisplayName()" data-i="save">Kaydet</button>
+      </div>
+      <div class="settings-msg" id="msg-displayname"></div>
+    </div>
+
+    <!-- Change Username -->
+    <div class="settings-section">
+      <h3 data-i="change_uname_section">🔖 Kullanıcı Adı Değiştir</h3>
+      <div class="settings-row">
+        <div class="field">
+          <label data-i="new_uname_label">YENİ KULLANICI ADI</label>
+          <input type="text" id="new-uname" autocomplete="off" placeholder="ornekkullanici" style="width:100%;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
+        </div>
+        <button class="btn sm" onclick="changeUname()" data-i="save">Kaydet</button>
+      </div>
+      <div class="settings-msg" id="msg-uname"></div>
+    </div>
+
+    <!-- Change Email -->
+    <div class="settings-section">
+      <h3 data-i="change_username_section">📧 Email Değiştir</h3>
+      <div class="settings-row">
+        <div class="field">
+          <label data-i="new_username_label">YENİ EMAIL</label>
+          <input type="email" id="new-username" autocomplete="off" style="width:100%;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
         </div>
         <div class="field">
           <label data-i="current_pass_label">MEVCUT ŞİFRE</label>
@@ -795,57 +826,57 @@
     <div class="pricing-hero">
       <div style="font-size:40px;margin-bottom:12px">🔐</div>
       <h1>VAULT <span style="background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Pro</span></h1>
-      <p>Limitsiz depolama. Reklamsız deneyim. Tam güç.</p>
+      <p data-i="pricing_hero_sub">Unlimited storage. Ad-free. Full power.</p>
     </div>
     <div class="pricing-grid">
       <!-- Free -->
       <div class="pricing-card">
         <div class="pricing-card-name">Free</div>
-        <div class="pricing-card-price">₺0 <span>/ ay</span></div>
-        <div class="pricing-card-desc">Başlamak için ideal</div>
+        <div class="pricing-card-price">₺0 <span data-i="per_month">/ mo</span></div>
+        <div class="pricing-card-desc" data-i="free_desc">Perfect to get started</div>
         <ul class="pricing-features">
-          <li><span class="pf-icon">✅</span> 5 Not</li>
-          <li><span class="pf-icon">✅</span> 5 Şifre</li>
-          <li><span class="pf-icon">✅</span> 10 Görev</li>
-          <li><span class="pf-icon">❌</span> <span style="color:var(--text2);text-decoration:line-through">Kilitli Notlar</span></li>
-          <li><span class="pf-icon">📢</span> Reklam var</li>
+          <li><span class="pf-icon">✅</span> <span data-i="free_f1">5 Notes</span></li>
+          <li><span class="pf-icon">✅</span> <span data-i="free_f2">5 Passwords</span></li>
+          <li><span class="pf-icon">✅</span> <span data-i="free_f3">10 Tasks</span></li>
+          <li><span class="pf-icon">❌</span> <span style="color:var(--text2);text-decoration:line-through" data-i="free_f4">Locked Notes</span></li>
+          <li><span class="pf-icon">📢</span> <span data-i="free_f5">Has ads</span></li>
         </ul>
-        <button class="pricing-btn free-btn" id="pricing-free-btn" onclick="switchTab('notes')">Devam Et</button>
+        <button class="pricing-btn free-btn" id="pricing-free-btn" onclick="switchTab('notes')" data-i="continue_btn">Continue</button>
       </div>
       <!-- Pro -->
       <div class="pricing-card pro-card">
-        <div class="pricing-card-badge">⭐ EN POPÜLER</div>
+        <div class="pricing-card-badge" data-i="most_popular">⭐ MOST POPULAR</div>
         <div class="pricing-card-name" style="color:#fbbf24">Pro</div>
-        <div class="pricing-card-price" style="color:#fbbf24" id="pricing-display-price">₺79 <span>/ ay</span></div>
-        <div class="pricing-card-desc">Tüm özellikler, limitsiz</div>
+        <div class="pricing-card-price" style="color:#fbbf24" id="pricing-display-price">₺79 <span data-i="per_month">/ mo</span></div>
+        <div class="pricing-card-desc" data-i="pro_desc">All features, unlimited</div>
         <ul class="pricing-features">
-          <li><span class="pf-icon">✅</span> Sınırsız Not</li>
-          <li><span class="pf-icon">✅</span> Sınırsız Şifre</li>
-          <li><span class="pf-icon">✅</span> Sınırsız Görev</li>
-          <li><span class="pf-icon">✅</span> Kilitli Notlar</li>
-          <li><span class="pf-icon">🚫</span> Reklam yok</li>
+          <li><span class="pf-icon">✅</span> <span data-i="pro_f1">Unlimited Notes</span></li>
+          <li><span class="pf-icon">✅</span> <span data-i="pro_f2">Unlimited Passwords</span></li>
+          <li><span class="pf-icon">✅</span> <span data-i="pro_f3">Unlimited Tasks</span></li>
+          <li><span class="pf-icon">✅</span> <span data-i="pro_f4">Locked Notes</span></li>
+          <li><span class="pf-icon">🚫</span> <span data-i="pro_f5">No ads</span></li>
         </ul>
-        <button class="pricing-btn pro-btn" onclick="openUpgradeModal()">⭐ Pro'ya Geç</button>
+        <button class="pricing-btn pro-btn" onclick="openUpgradeModal()" data-i="upgrade_cta">⭐ Upgrade to Pro</button>
       </div>
     </div>
     <!-- FAQ -->
     <div class="pricing-faq">
-      <h2>Sık Sorulan Sorular</h2>
+      <h2 data-i="faq_title">Frequently Asked Questions</h2>
       <div class="faq-item">
-        <div class="faq-q">İstediğim zaman iptal edebilir miyim?</div>
-        <div class="faq-a">Evet, aboneliğini dilediğin zaman iptal edebilirsin. İptal sonrası ödeme dönemi sonuna kadar Pro özelliklerini kullanmaya devam edersin.</div>
+        <div class="faq-q" data-i="faq1_q">Can I cancel anytime?</div>
+        <div class="faq-a" data-i="faq1_a">Yes, you can cancel your subscription at any time. After cancellation, you retain Pro access until the end of the billing period.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Ödeme güvenli mi?</div>
-        <div class="faq-a">Tüm ödemeler Paddle altyapısıyla işlenir. Kart bilgilerin bizimle paylaşılmaz, direkt Paddle'ın güvenli ortamında işlenir.</div>
+        <div class="faq-q" data-i="faq2_q">Is payment secure?</div>
+        <div class="faq-a" data-i="faq2_a">All payments are processed by Paddle. Your card details are never shared with us — handled directly in Paddle's secure environment.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Para iade garantisi var mı?</div>
-        <div class="faq-a">Evet! İlk 14 gün içinde memnun kalmazsan tam iade yapıyoruz. Detaylar için iade politikamıza bakabilirsin.</div>
+        <div class="faq-q" data-i="faq3_q">Is there a money-back guarantee?</div>
+        <div class="faq-a" data-i="faq3_a">Yes! If you're not satisfied within the first 14 days, we'll give you a full refund. See our refund policy for details.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Free hesabımdaki verilerim korunur mu?</div>
-        <div class="faq-a">Kesinlikle. Pro'ya geçsen de geçmesen de verilerinin bir kısmı veya tamamı her zaman güvende.</div>
+        <div class="faq-q" data-i="faq4_q">Will my free plan data be safe?</div>
+        <div class="faq-a" data-i="faq4_a">Absolutely. Whether you upgrade or not, your data is always safe and secure.</div>
       </div>
     </div>
   </div>
@@ -857,35 +888,35 @@
       <div class="upgrade-header">
         <div class="upgrade-icon">⭐</div>
         <div class="upgrade-title">VAULT Pro</div>
-        <div class="upgrade-sub">Limitsiz depolama, reklamsız deneyim ve tüm premium özellikler.</div>
+        <div class="upgrade-sub" data-i="modal_sub">Unlimited storage, ad-free experience and all premium features.</div>
       </div>
-      <!-- Plan seçimi -->
+      <!-- Plan selection -->
       <div class="plan-cards">
         <div class="plan-card selected" id="plan-monthly" onclick="selectPlan('monthly')">
-          <div class="plan-label">Aylık</div>
-          <div class="plan-price">₺79 <span>/ ay</span></div>
-          <div class="plan-save" style="color:var(--text2)">Her ay yenilenir</div>
+          <div class="plan-label" data-i="plan_monthly_label">Monthly</div>
+          <div class="plan-price">₺79 <span data-i="per_month">/ mo</span></div>
+          <div class="plan-save" style="color:var(--text2)" data-i="plan_monthly_sub">Renews every month</div>
         </div>
         <div class="plan-card" id="plan-yearly" onclick="selectPlan('yearly')">
-          <div class="plan-label">Yıllık</div>
-          <div class="plan-price">₺599 <span>/ yıl</span></div>
-          <div class="plan-save">🎉 %37 tasarruf!</div>
+          <div class="plan-label" data-i="plan_yearly_label">Yearly</div>
+          <div class="plan-price">₺599 <span data-i="per_year">/ yr</span></div>
+          <div class="plan-save" data-i="plan_yearly_save">🎉 Save 37%!</div>
         </div>
       </div>
       <!-- Features -->
       <div class="feature-list">
-        <div class="feature-item"><span class="fi-icon">♾️</span><span class="fi-text">Sınırsız not, şifre ve görev</span></div>
-        <div class="feature-item"><span class="fi-icon">🔒</span><span class="fi-text">Kilitli notlar</span></div>
-        <div class="feature-item"><span class="fi-icon">🚫</span><span class="fi-text">Reklamsız deneyim</span></div>
-        <div class="feature-item"><span class="fi-icon">🛡️</span><span class="fi-text">14 gün para iade garantisi</span></div>
-        <div class="feature-item"><span class="fi-icon">⚡</span><span class="fi-text">Öncelikli destek</span></div>
+        <div class="feature-item"><span class="fi-icon">♾️</span><span class="fi-text" data-i="feat_unlimited">Unlimited notes, passwords & tasks</span></div>
+        <div class="feature-item"><span class="fi-icon">🔒</span><span class="fi-text" data-i="feat_locked">Locked notes</span></div>
+        <div class="feature-item"><span class="fi-icon">🚫</span><span class="fi-text" data-i="feat_noads">Ad-free experience</span></div>
+        <div class="feature-item"><span class="fi-icon">🛡️</span><span class="fi-text" data-i="feat_refund">14-day money-back guarantee</span></div>
+        <div class="feature-item"><span class="fi-icon">⚡</span><span class="fi-text" data-i="feat_support">Priority support</span></div>
       </div>
-      <button class="checkout-btn" id="checkout-btn" onclick="startCheckout()">⭐ Pro'ya Geç — <span id="checkout-price-label">₺79/ay</span></button>
-      <div class="checkout-note">Güvenli ödeme · Paddle ile · İstediğin zaman iptal</div>
+      <button class="checkout-btn" id="checkout-btn" onclick="startCheckout()">⭐ <span data-i="upgrade_cta_btn">Upgrade to Pro</span> — <span id="checkout-price-label">₺79/mo</span></button>
+      <div class="checkout-note" data-i="checkout_note">Secure payment · Via Paddle · Cancel anytime</div>
       <div style="text-align:center;margin-top:10px;display:flex;justify-content:center;gap:16px">
-        <a href="/terms" target="_blank" style="font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;">Kullanım Şartları</a>
-        <a href="/privacy" target="_blank" style="font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;">Gizlilik</a>
-        <a href="/refund" target="_blank" style="font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;">İade Politikası</a>
+        <a href="/terms" target="_blank" style="font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;" data-i="terms_link">Terms</a>
+        <a href="/privacy" target="_blank" style="font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;" data-i="privacy_link">Privacy</a>
+        <a href="/refund" target="_blank" style="font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;" data-i="refund_link">Refund Policy</a>
       </div>
     </div>
   </div>
@@ -1193,7 +1224,7 @@
 //  FIREBASE INIT
 // ══════════════════════════════════════════
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword, updateEmail, deleteUser, EmailAuthProvider, reauthenticateWithCredential } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword, updateEmail, updateProfile, deleteUser, EmailAuthProvider, reauthenticateWithCredential } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, addDoc, deleteDoc, query, where, writeBatch, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -1238,11 +1269,56 @@ const LANG = {
     err_short:'Şifre en az 6 karakter olmalı.', err_user_exists:'Bu email zaten kayıtlı.',
     err_not_found:'Kullanıcı bulunamadı.', err_wrong_pass:'Şifre yanlış.',
     err_vault_wrong:'Kasa şifresi yanlış.', err_note_wrong:'Not şifresi yanlış.',
-    err_confirm_pass:'Mevcut şifre gerekli.',
-    ok_username:'Email güncellendi.', ok_pass:'Şifre güncellendi.', ok_vault_pass:'Kasa şifresi güncellendi.',
+    err_confirm_pass:'Mevcut şifre gerekli.', err_name:'İsim zorunludur.',
+    err_invalid_email:'Geçersiz email formatı.', err_too_many:'Çok fazla deneme. Biraz bekle.',
+    ok_username:'Email güncellendi.', ok_pass:'Şifre güncellendi.', ok_vault_pass:'Kasa şifresi güncellendi.', ok_name:'İsim güncellendi.',
     confirm_delete:'Tüm veriler silinecek. Emin misin?',
     copied:'✅ Kopyalandı!', note_pass_required:'Şifre zorunlu.',
     err_username_taken:'Bu email alınmış.', loading:'Yükleniyor...',
+    name_label:'İSİM', email_label:'EMAIL', login_input_label:'EMAIL VEYA KULLANICI ADI',
+    change_name_section:'👤 İsim Değiştir', new_name_label:'YENİ İSİM',
+    change_uname_section:'🔖 Kullanıcı Adı Değiştir', new_uname_label:'YENİ KULLANICI ADI',
+    ok_uname:'Kullanıcı adı güncellendi.',
+    err_uname_taken:'Bu kullanıcı adı zaten alınmış.',
+    err_uname_format:'Sadece harf, rakam ve _ kullanabilirsin.',
+    // Pro / upgrade
+    terms_accept:'Kullanım şartlarını kabul etmen gerekiyor.',
+    terms_label_1:'Kullanım Şartları', terms_label_2:'Gizlilik Politikası', terms_text:"'nı ve", terms_text2:"'nı okudum, kabul ediyorum.",
+    pro_active:'VAULT Pro Aktif', pro_active_sub:'Sınırsız not, şifre ve görev. Reklamsız deneyim.',
+    free_plan:'FREE PLAN', upgrade_btn:'Planı Yükselt →', pro_sub:'Sınırsız her şey · Reklamsız · Kilitli notlar',
+    limit_notes:(n)=>`Free limiti doldu (${n} not). Pro'ya geç!`,
+    limit_passwords:(n)=>`Free limiti doldu (${n} şifre). Daha fazlası için Pro'ya geç.`,
+    limit_tasks:(n)=>`Free limiti doldu (${n} görev). Daha fazlası için Pro'ya geç.`,
+    limit_toast:(n,type)=>`⚠️ Free planda maksimum ${n} ${type} ekleyebilirsin. Pro'ya geç!`,
+    limit_btn:'Pro\'ya Geç',
+    locked_note_pro:'Kilitli notlar sadece Pro kullanıcılarında!',
+    plan_section_title:'💳 Planı Yükselt',
+    feat_unlimited:'Sınırsız not, şifre ve görev',
+    feat_locked:'Kilitli notlar',
+    feat_noads:'Reklamsız deneyim',
+    feat_refund:'14 gün para iade garantisi',
+    feat_support:'Öncelikli destek',
+    pricing_hero_sub:'Limitsiz depolama. Reklamsız deneyim. Tam güç.',
+    per_month:'/ ay', per_year:'/ yıl',
+    free_desc:'Başlamak için ideal', pro_desc:'Tüm özellikler, limitsiz',
+    free_f1:'5 Not', free_f2:'5 Şifre', free_f3:'10 Görev', free_f4:'Kilitli Notlar', free_f5:'Reklam var',
+    pro_f1:'Sınırsız Not', pro_f2:'Sınırsız Şifre', pro_f3:'Sınırsız Görev', pro_f4:'Kilitli Notlar', pro_f5:'Reklam yok',
+    continue_btn:'Devam Et', upgrade_cta:'⭐ Pro\'ya Geç', upgrade_cta_btn:'Pro\'ya Geç',
+    most_popular:'⭐ EN POPÜLER',
+    faq_title:'Sık Sorulan Sorular',
+    faq1_q:'İstediğim zaman iptal edebilir miyim?', faq1_a:'Evet, aboneliğini dilediğin zaman iptal edebilirsin. İptal sonrası ödeme dönemi sonuna kadar Pro özelliklerini kullanmaya devam edersin.',
+    faq2_q:'Ödeme güvenli mi?', faq2_a:'Tüm ödemeler Paddle altyapısıyla işlenir. Kart bilgilerin bizimle paylaşılmaz.',
+    faq3_q:'Para iade garantisi var mı?', faq3_a:'Evet! İlk 14 gün içinde memnun kalmazsan tam iade yapıyoruz.',
+    faq4_q:'Free hesabımdaki verilerim korunur mu?', faq4_a:'Kesinlikle. Pro\'ya geçsen de geçmesen de verilerinin tamamı her zaman güvende.',
+    modal_sub:'Limitsiz depolama, reklamsız deneyim ve tüm premium özellikler.',
+    plan_monthly_label:'Aylık', plan_yearly_label:'Yıllık',
+    plan_monthly_sub:'Her ay yenilenir', plan_yearly_save:'🎉 %37 tasarruf!',
+    checkout_note:'Güvenli ödeme · Paddle ile · İstediğin zaman iptal',
+    terms_link:'Kullanım Şartları', privacy_link:'Gizlilik', refund_link:'İade Politikası',
+    ad_label:'Reklam',
+    ad1_text:'🚀 VAULT Pro ile tüm limitleri kaldır — sınırsız not, şifre ve görev!', ad1_cta:'Pro\'ya Geç',
+    ad2_text:'🔒 Kilitli notlar özelliği sadece Pro\'da!', ad2_cta:'Keşfet',
+    ad3_text:'⭐ Yıllık plana geç, %37 tasarruf et!', ad3_cta:'Görüntüle',
   },
   en: {
     login:'Login', register:'Register',
@@ -1269,11 +1345,56 @@ const LANG = {
     err_short:'Password must be at least 6 characters.', err_user_exists:'Email already in use.',
     err_not_found:'User not found.', err_wrong_pass:'Wrong password.',
     err_vault_wrong:'Wrong vault password.', err_note_wrong:'Wrong note password.',
-    err_confirm_pass:'Current password required.',
-    ok_username:'Email updated.', ok_pass:'Password updated.', ok_vault_pass:'Vault password updated.',
+    err_confirm_pass:'Current password required.', err_name:'Name is required.',
+    err_invalid_email:'Invalid email format.', err_too_many:'Too many attempts. Please wait.',
+    ok_username:'Email updated.', ok_pass:'Password updated.', ok_vault_pass:'Vault password updated.', ok_name:'Name updated.',
     confirm_delete:'All data will be deleted. Are you sure?',
     copied:'✅ Copied!', note_pass_required:'Password required.',
     err_username_taken:'Email already taken.', loading:'Loading...',
+    name_label:'FULL NAME', email_label:'EMAIL', login_input_label:'EMAIL OR USERNAME',
+    change_name_section:'👤 Change Name', new_name_label:'NEW NAME',
+    change_uname_section:'🔖 Change Username', new_uname_label:'NEW USERNAME',
+    ok_uname:'Username updated.',
+    err_uname_taken:'This username is already taken.',
+    err_uname_format:'Only letters, numbers and _ allowed.',
+    // Pro / upgrade
+    terms_accept:'You must accept the terms to continue.',
+    terms_label_1:'Terms of Service', terms_label_2:'Privacy Policy', terms_text:' and ', terms_text2:' — I have read and agree.',
+    pro_active:'VAULT Pro Active', pro_active_sub:'Unlimited notes, passwords & tasks. Ad-free experience.',
+    free_plan:'FREE PLAN', upgrade_btn:'Upgrade Plan →', pro_sub:'Unlimited everything · No ads · Locked notes',
+    limit_notes:(n)=>`Free plan limit reached (${n} notes). Upgrade to Pro!`,
+    limit_passwords:(n)=>`Free plan limit reached (${n} passwords). Upgrade to Pro!`,
+    limit_tasks:(n)=>`Free plan limit reached (${n} tasks). Upgrade to Pro!`,
+    limit_toast:(n,type)=>`⚠️ Free plan allows up to ${n} ${type}. Upgrade to Pro!`,
+    limit_btn:'Upgrade',
+    locked_note_pro:'Locked notes are a Pro feature!',
+    plan_section_title:'💳 Upgrade Plan',
+    feat_unlimited:'Unlimited notes, passwords & tasks',
+    feat_locked:'Locked notes',
+    feat_noads:'Ad-free experience',
+    feat_refund:'14-day money-back guarantee',
+    feat_support:'Priority support',
+    pricing_hero_sub:'Unlimited storage. Ad-free. Full power.',
+    per_month:'/ mo', per_year:'/ yr',
+    free_desc:'Perfect to get started', pro_desc:'All features, unlimited',
+    free_f1:'5 Notes', free_f2:'5 Passwords', free_f3:'10 Tasks', free_f4:'Locked Notes', free_f5:'Has ads',
+    pro_f1:'Unlimited Notes', pro_f2:'Unlimited Passwords', pro_f3:'Unlimited Tasks', pro_f4:'Locked Notes', pro_f5:'No ads',
+    continue_btn:'Continue', upgrade_cta:'⭐ Upgrade to Pro', upgrade_cta_btn:'Upgrade to Pro',
+    most_popular:'⭐ MOST POPULAR',
+    faq_title:'Frequently Asked Questions',
+    faq1_q:'Can I cancel anytime?', faq1_a:'Yes, you can cancel your subscription at any time. After cancellation, you retain Pro access until the end of the billing period.',
+    faq2_q:'Is payment secure?', faq2_a:'All payments are processed by Paddle. Your card details are never shared with us.',
+    faq3_q:'Is there a money-back guarantee?', faq3_a:'Yes! If you\'re not satisfied within the first 14 days, we\'ll give you a full refund.',
+    faq4_q:'Will my free plan data be safe?', faq4_a:'Absolutely. Whether you upgrade or not, your data is always safe and secure.',
+    modal_sub:'Unlimited storage, ad-free experience and all premium features.',
+    plan_monthly_label:'Monthly', plan_yearly_label:'Yearly',
+    plan_monthly_sub:'Renews every month', plan_yearly_save:'🎉 Save 37%!',
+    checkout_note:'Secure payment · Via Paddle · Cancel anytime',
+    terms_link:'Terms', privacy_link:'Privacy', refund_link:'Refund Policy',
+    ad_label:'Ad',
+    ad1_text:'🚀 Remove all limits with VAULT Pro — unlimited notes, passwords & tasks!', ad1_cta:'Upgrade',
+    ad2_text:'🔒 Locked notes is a Pro-only feature!', ad2_cta:'Explore',
+    ad3_text:'⭐ Go yearly and save 37%!', ad3_cta:'View',
   }
 };
 let currentLang = 'tr';
@@ -1289,8 +1410,17 @@ function applyLanguage() {
   document.getElementById('auth-btn').textContent = isLogin ? t('login') : t('register');
   document.getElementById('lang-tr').classList.toggle('active', currentLang==='tr');
   document.getElementById('lang-en').classList.toggle('active', currentLang==='en');
-  // update username label to EMAIL
   document.querySelectorAll('[data-i="username_label"]').forEach(el => el.textContent = t('username_label'));
+  const planTitle = document.getElementById('plan-section-title');
+  if (planTitle) planTitle.textContent = t('plan_section_title');
+  // Update terms checkbox label
+  const termsEl = document.getElementById('terms-label-text');
+  if (termsEl) termsEl.innerHTML = `<a href="/terms" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600">${t('terms_label_1')}</a>${t('terms_text')}<a href="/privacy" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600">${t('terms_label_2')}</a>${t('terms_text2')}`;
+  // Update auth pass2 placeholder
+  const pass2 = document.getElementById('auth-pass2');
+  if (pass2) pass2.placeholder = t('confirm_label').toLowerCase();
+  // Re-render pro UI if logged in
+  if (typeof updateProUI === 'function' && document.getElementById('app')?.style.display !== 'none') updateProUI();
 }
 
 function setLang(lang) {
@@ -1407,7 +1537,7 @@ function boot() {
     showLoading(false);
     if (user) {
       currentUser = user;
-      currentDisplayName = user.email.split('@')[0];
+      currentDisplayName = user.displayName || user.email.split('@')[0];
       await loadApp();
     } else {
       currentUser = null;
@@ -1440,31 +1570,47 @@ function switchAuthTab(mode) {
   authMode = mode;
   document.getElementById('tab-login').classList.toggle('active', mode==='login');
   document.getElementById('tab-register').classList.toggle('active', mode==='register');
+  document.getElementById('register-name-field').style.display = mode==='register' ? 'block' : 'none';
   document.getElementById('register-confirm-field').style.display = mode==='register' ? 'block' : 'none';
   document.getElementById('register-terms-field').style.display = mode==='register' ? 'block' : 'none';
   document.getElementById('auth-btn').textContent = t(mode);
   document.getElementById('auth-err').textContent = '';
-  const inp = document.getElementById('auth-user');
-  inp.placeholder = mode==='register' ? 'email@example.com' : 'email@example.com';
 }
 
 async function authAction() {
-  const email = document.getElementById('auth-user').value.trim();
-  const pass  = document.getElementById('auth-pass').value;
-  const pass2 = document.getElementById('auth-pass2').value;
-  const errEl = document.getElementById('auth-err');
+  let input  = document.getElementById('auth-user').value.trim();
+  const pass   = document.getElementById('auth-pass').value;
+  const pass2  = document.getElementById('auth-pass2').value;
+  const name   = document.getElementById('auth-name')?.value.trim();
+  const errEl  = document.getElementById('auth-err');
   errEl.textContent = '';
-  if (!email || !pass) { errEl.textContent = t('err_fill'); return; }
+  if (!input || !pass) { errEl.textContent = t('err_fill'); return; }
   const btn = document.getElementById('auth-btn');
   btn.textContent = t('loading'); btn.disabled = true;
   try {
     if (authMode === 'register') {
+      if (!name) { errEl.textContent = t('err_name'); return; }
       if (pass !== pass2) { errEl.textContent = t('err_pass_match'); return; }
       if (pass.length < 6) { errEl.textContent = t('err_short'); return; }
       const termsChecked = document.getElementById('terms-checkbox')?.checked;
-      if (!termsChecked) { errEl.textContent = 'Kullanım şartlarını kabul etmen gerekiyor.'; return; }
-      await createUserWithEmailAndPassword(auth, email, pass);
+      if (!termsChecked) { errEl.textContent = t('terms_accept'); return; }
+      // Username must be email on register
+      if (!input.includes('@')) { errEl.textContent = t('err_invalid_email'); return; }
+      const cred = await createUserWithEmailAndPassword(auth, input, pass);
+      await updateProfile(cred.user, { displayName: name });
+      // Save username → email mapping (username = name lowercased, no spaces)
+      const uname = name.toLowerCase().replace(/\s+/g, '');
+      await setDoc(doc(db, `usernames/${uname}`), { email: input, uid: cred.user.uid });
     } else {
+      // Login: check if input is email or username
+      let email = input;
+      if (!input.includes('@')) {
+        // Lookup username
+        const uname = input.toLowerCase().replace(/\s+/g, '');
+        const snap = await getDoc(doc(db, `usernames/${uname}`));
+        if (!snap.exists()) { errEl.textContent = t('err_not_found'); return; }
+        email = snap.data().email;
+      }
       await signInWithEmailAndPassword(auth, email, pass);
     }
   } catch(e) {
@@ -1473,8 +1619,8 @@ async function authAction() {
       'auth/user-not-found': t('err_not_found'),
       'auth/wrong-password': t('err_wrong_pass'),
       'auth/invalid-credential': t('err_wrong_pass'),
-      'auth/invalid-email': 'Geçersiz email formatı.',
-      'auth/too-many-requests': 'Çok fazla deneme. Biraz bekle.',
+      'auth/invalid-email': t('err_invalid_email'),
+      'auth/too-many-requests': t('err_too_many'),
     };
     errEl.textContent = msg[e.code] || e.message;
   } finally {
@@ -1486,6 +1632,7 @@ async function logout() {
   await signOut(auth);
   pwdUnlocked = false;
   _cachedNotes = []; _cachedPwds = []; _cachedTasks = [];
+  document.getElementById('auth-name') && (document.getElementById('auth-name').value = '');
   document.getElementById('auth-user').value = '';
   document.getElementById('auth-pass').value = '';
   document.getElementById('auth-pass2').value = '';
@@ -1526,8 +1673,8 @@ function updateProUI() {
       <div style="display:flex;align-items:center;gap:14px;padding:8px 0">
         <span style="font-size:32px">⭐</span>
         <div>
-          <div style="font-size:16px;font-weight:800;color:#fbbf24">VAULT Pro Aktif</div>
-          <div style="font-size:13px;color:var(--text2);margin-top:3px">Sınırsız not, şifre ve görev. Reklamsız deneyim.</div>
+          <div style="font-size:16px;font-weight:800;color:#fbbf24">${t('pro_active')}</div>
+          <div style="font-size:13px;color:var(--text2);margin-top:3px">${t('pro_active_sub')}</div>
         </div>
       </div>`;
   } else {
@@ -1537,8 +1684,8 @@ function updateProUI() {
       <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
           <div>
-            <div style="font-size:14px;font-weight:700;color:var(--text2);letter-spacing:1px;font-family:'JetBrains Mono',monospace">FREE PLAN</div>
-            <div style="font-size:12px;color:var(--text2);margin-top:4px">Not: ${_cachedNotes.length||0}/${FREE_LIMITS.notes} &nbsp;·&nbsp; Şifre: ${_cachedPwds.length||0}/${FREE_LIMITS.passwords} &nbsp;·&nbsp; Görev: ${_cachedTasks.length||0}/${FREE_LIMITS.tasks}</div>
+            <div style="font-size:14px;font-weight:700;color:var(--text2);letter-spacing:1px;font-family:'JetBrains Mono',monospace">${t('free_plan')}</div>
+            <div style="font-size:12px;color:var(--text2);margin-top:4px">Notes: ${_cachedNotes.length||0}/${FREE_LIMITS.notes} &nbsp;·&nbsp; Passwords: ${_cachedPwds.length||0}/${FREE_LIMITS.passwords} &nbsp;·&nbsp; Tasks: ${_cachedTasks.length||0}/${FREE_LIMITS.tasks}</div>
           </div>
         </div>
       </div>
@@ -1546,9 +1693,9 @@ function updateProUI() {
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
           <div>
             <div style="font-size:15px;font-weight:800;color:#fbbf24">⭐ VAULT Pro</div>
-            <div style="font-size:13px;color:var(--text2);margin-top:4px">Sınırsız her şey · Reklamsız · Kilitli notlar</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:4px">${t('pro_sub')}</div>
           </div>
-          <button class="checkout-btn" style="width:auto;padding:10px 22px;font-size:14px" onclick="openUpgradeModal()">Planı Yükselt →</button>
+          <button class="checkout-btn" style="width:auto;padding:10px 22px;font-size:14px" onclick="openUpgradeModal()">${t('upgrade_btn')}</button>
         </div>
       </div>`;
   }
@@ -1565,26 +1712,26 @@ function checkLimit(type, currentCount) {
 }
 
 function showLimitModal(type, limit) {
-  const names = { notes: 'not', passwords: 'şifre', tasks: 'görev' };
-  showToast(`⚠️ Free planda maksimum ${limit} ${names[type]} ekleyebilirsin. Pro'ya geç!`);
+  const typeNames = { notes: currentLang==='tr'?'not':'notes', passwords: currentLang==='tr'?'şifre':'passwords', tasks: currentLang==='tr'?'görev':'tasks' };
+  showToast(t('limit_toast')(limit, typeNames[type]));
   setTimeout(() => openUpgradeModal(), 800);
 }
 
 // ── Ad banner renderer ──
 function renderAdBanner(containerId) {
-  if (_isPro) return; // No ads for Pro
+  if (_isPro) return;
   const container = document.getElementById(containerId);
   if (!container) return;
   const ads = [
-    { text: '🚀 VAULT Pro ile tüm limitleri kaldır — sınırsız not, şifre ve görev!', cta: 'Pro\'ya Geç', action: 'openUpgradeModal()' },
-    { text: '🔒 Kilitli notlar özelliği sadece Pro kullanıcılarında! Gizliliğini artır.', cta: 'Keşfet', action: 'openUpgradeModal()' },
-    { text: '⭐ Yıllık plana geç, %37 tasarruf et!', cta: 'Görüntüle', action: "switchTab('pricing')" },
+    { text: t('ad1_text'), cta: t('ad1_cta'), action: 'openUpgradeModal()' },
+    { text: t('ad2_text'), cta: t('ad2_cta'), action: 'openUpgradeModal()' },
+    { text: t('ad3_text'), cta: t('ad3_cta'), action: "switchTab('pricing')" },
   ];
   const ad = ads[Math.floor(Math.random() * ads.length)];
   container.innerHTML = `
     <div class="ad-banner">
       <div>
-        <div class="ad-banner-label">Reklam</div>
+        <div class="ad-banner-label">${t('ad_label')}</div>
         <div class="ad-banner-text">${ad.text}</div>
       </div>
       <button class="ad-banner-cta" onclick="${ad.action}">${ad.cta}</button>
@@ -1659,7 +1806,7 @@ async function renderNotes() {
 
   const adHtml = !_isPro ? `<div id="notes-ad-container" style="grid-column:1/-1"></div>` : '';
   const limitHtml = (!_isPro && _cachedNotes.length >= FREE_LIMITS.notes)
-    ? `<div class="limit-warning" style="grid-column:1/-1"><span class="lw-icon">⚠️</span><span class="lw-text">Free limiti doldu (${FREE_LIMITS.notes} not). Pro'ya geç!</span><button class="lw-btn" onclick="openUpgradeModal()">Pro'ya Geç</button></div>`
+    ? `<div class="limit-warning" style="grid-column:1/-1"><span class="lw-icon">⚠️</span><span class="lw-text">${t('limit_notes')(FREE_LIMITS.notes)}</span><button class="lw-btn" onclick="openUpgradeModal()">${t('limit_btn')}</button></div>`
     : '';
 
   if (!_cachedNotes.length) {
@@ -1714,7 +1861,7 @@ function closeNoteModal() { document.getElementById('note-modal').classList.remo
 
 function toggleLock() {
   if (!_isPro) {
-    showToast('🔒 Kilitli notlar sadece Pro kullanıcılarında!');
+    showToast(t('locked_note_pro'));
     setTimeout(() => openUpgradeModal(), 600);
     return;
   }
@@ -1878,7 +2025,7 @@ async function renderPwds() {
   // Limit warning
   let limitHtml = '';
   if (!_isPro && _cachedPwds.length >= FREE_LIMITS.passwords) {
-    limitHtml = `<div class="limit-warning"><span class="lw-icon">⚠️</span><span class="lw-text">Free limiti doldu (${FREE_LIMITS.passwords} şifre). Daha fazlası için Pro'ya geç.</span><button class="lw-btn" onclick="openUpgradeModal()">Pro'ya Geç</button></div>`;
+    limitHtml = `<div class="limit-warning"><span class="lw-icon">⚠️</span><span class="lw-text">${t('limit_passwords')(FREE_LIMITS.passwords)}</span><button class="lw-btn" onclick="openUpgradeModal()">${t('limit_btn')}</button></div>`;
   }
 
   if (!_cachedPwds.length) {
@@ -1981,7 +2128,7 @@ async function renderTasks() {
   const lw = document.getElementById('tasks-limit-warning');
   if (lw) {
     if (!_isPro && _cachedTasks.length >= FREE_LIMITS.tasks) {
-      lw.innerHTML = `<div class="limit-warning"><span class="lw-icon">⚠️</span><span class="lw-text">Free limiti doldu (${FREE_LIMITS.tasks} görev). Daha fazlası için Pro'ya geç.</span><button class="lw-btn" onclick="openUpgradeModal()">Pro'ya Geç</button></div>`;
+      lw.innerHTML = `<div class="limit-warning"><span class="lw-icon">⚠️</span><span class="lw-text">${t('limit_tasks')(FREE_LIMITS.tasks)}</span><button class="lw-btn" onclick="openUpgradeModal()">${t('limit_btn')}</button></div>`;
     } else {
       lw.innerHTML = '';
     }
@@ -2242,6 +2389,41 @@ function checkOverdueBanner(){
 // ══════════════════════════════════════════
 //  SETTINGS
 // ══════════════════════════════════════════
+async function changeDisplayName(){
+  const newName=document.getElementById('new-display-name').value.trim();
+  const msg=document.getElementById('msg-displayname');
+  if(!newName){setMsg(msg,t('err_fill'),false);return;}
+  try{
+    await updateProfile(currentUser,{displayName:newName});
+    currentDisplayName=newName;
+    document.getElementById('topbar-username').textContent='/ '+currentDisplayName;
+    document.getElementById('new-display-name').value='';
+    setMsg(msg,t('ok_name'),true);
+  }catch(e){setMsg(msg,e.message,false);}
+}
+
+async function changeUname(){
+  const newUname = document.getElementById('new-uname').value.trim().toLowerCase().replace(/\s+/g,'');
+  const msg = document.getElementById('msg-uname');
+  if(!newUname){setMsg(msg,t('err_fill'),false);return;}
+  if(!/^[a-z0-9_]+$/.test(newUname)){setMsg(msg,t('err_uname_format'),false);return;}
+  try{
+    // Check if taken
+    const snap = await getDoc(doc(db,`usernames/${newUname}`));
+    if(snap.exists()&&snap.data().uid!==currentUser.uid){setMsg(msg,t('err_uname_taken'),false);return;}
+    // Delete old username entry if exists
+    const meta = await getUserMeta();
+    if(meta.username){
+      await deleteDoc(doc(db,`usernames/${meta.username}`));
+    }
+    // Save new username
+    await setDoc(doc(db,`usernames/${newUname}`),{email:currentUser.email,uid:currentUser.uid});
+    await setUserMeta({username:newUname});
+    document.getElementById('new-uname').value='';
+    setMsg(msg,t('ok_uname'),true);
+  }catch(e){setMsg(msg,e.message,false);}
+}
+
 async function changeUsername(){
   const newEmail=document.getElementById('new-username').value.trim();
   const pass=document.getElementById('confirm-pass-username').value;
@@ -2251,8 +2433,7 @@ async function changeUsername(){
     const cred=EmailAuthProvider.credential(currentUser.email,pass);
     await reauthenticateWithCredential(currentUser,cred);
     await updateEmail(currentUser,newEmail);
-    currentDisplayName=newEmail.split('@')[0];
-    document.getElementById('topbar-username').textContent='/ '+currentDisplayName;
+    // Don't overwrite displayName, keep it as is
     document.getElementById('new-username').value='';
     document.getElementById('confirm-pass-username').value='';
     setMsg(msg,t('ok_username'),true);
@@ -2334,7 +2515,7 @@ Object.assign(window,{
   openTaskModal,closeTaskModal,saveTask,editTask,deleteTask,
   toggleTaskDone,toggleSubtask,taskDragStart,taskDrop,
   setChip,renderTagSelector,toggleTag,addCustomTag,addSubtask,removeSubtask,renderSubtaskEditor,
-  changeUsername,changeMasterPass,changeVaultPass,deleteAccount,
+  changeDisplayName,changeUname,changeUsername,changeMasterPass,changeVaultPass,deleteAccount,
   setLang,toggleEye,copyText,renderTasks,renderNotes,renderPwds,
   openUpgradeModal,closeUpgradeModal,selectPlan,startCheckout,
 });
