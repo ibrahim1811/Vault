@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refund Policy — VAULT</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f; --surface: #111118; --surface2: #1a1a24;
+    --border: #2a2a3a; --accent: #6c63ff; --green: #4ade80;
+    --text: #e8e8f0; --text2: #8888aa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px; background: var(--surface); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .logo { font-size: 20px; font-weight: 800; color: var(--accent); text-decoration: none; }
+  .back-btn {
+    padding: 7px 16px; border-radius: 8px; background: var(--surface2);
+    border: 1px solid var(--border); color: var(--text2); font-size: 13px;
+    font-family: 'Syne', sans-serif; text-decoration: none; transition: all .2s;
+  }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 28px 80px; }
+  .badge {
+    display: inline-block; background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text2); font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  h1 {
+    font-size: 36px; font-weight: 800; margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .last-updated { font-size: 13px; color: var(--text2); font-family: 'JetBrains Mono', monospace; margin-bottom: 40px; }
+  .guarantee-box {
+    background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(108,99,255,0.08));
+    border: 1px solid var(--green); border-radius: 16px;
+    padding: 28px; margin-bottom: 24px; text-align: center;
+  }
+  .guarantee-box .g-icon { font-size: 40px; margin-bottom: 10px; }
+  .guarantee-box h2 { font-size: 22px; font-weight: 800; color: var(--green); margin-bottom: 8px; }
+  .guarantee-box p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+  .section h2 {
+    font-size: 16px; font-weight: 700; color: var(--accent);
+    font-family: 'JetBrains Mono', monospace; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section h2::before { content: ''; display: inline-block; width: 3px; height: 16px; background: var(--accent); border-radius: 2px; }
+  .section p, .section li { font-size: 14px; color: var(--text2); line-height: 1.8; }
+  .section ul { padding-left: 20px; }
+  .section li { margin-bottom: 6px; }
+  .steps { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+    color: #fff; font-size: 13px; font-weight: 700; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+  }
+  .step p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+  .contact-box { background: var(--surface2); border: 1px solid var(--accent); border-radius: 12px; padding: 20px; margin-top: 32px; text-align: center; }
+  .contact-box p { font-size: 14px; color: var(--text2); }
+  .contact-box a { color: var(--accent); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="https://vaultcase.netlify.app">🔐 VAULT</a>
+  <a class="back-btn" href="https://vaultcase.netlify.app">← Back to App</a>
+</header>
+<main>
+  <div class="badge">Legal</div>
+  <h1>Refund Policy</h1>
+  <p class="last-updated">Last updated: June 2025</p>
+
+  <div class="guarantee-box">
+    <div class="g-icon">🛡️</div>
+    <h2>14-Day Money-Back Guarantee</h2>
+    <p>We stand behind VAULT Pro. If you're not completely satisfied within the first 14 days of your subscription, we'll give you a full refund — no questions asked.</p>
+  </div>
+
+  <div class="section">
+    <h2>Eligibility for Refund</h2>
+    <ul>
+      <li>Refund requests must be made within 14 days of the initial subscription purchase</li>
+      <li>Applies to both monthly and annual Pro plans</li>
+      <li>Only the most recent charge is eligible for refund</li>
+      <li>Accounts that have violated our Terms of Service are not eligible</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>How to Request a Refund</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <p>Send an email to <strong style="color:var(--accent)">support@vaultcase.netlify.app</strong> with the subject line "Refund Request"</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <p>Include the email address associated with your VAULT account and the date of purchase</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <p>We will process your refund within 5-7 business days and confirm via email</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>After the 14-Day Period</h2>
+    <p>Refund requests made after the 14-day window are evaluated on a case-by-case basis. We may offer a partial refund or account credit at our discretion. Please contact us and explain your situation — we're here to help.</p>
+  </div>
+
+  <div class="section">
+    <h2>Subscription Cancellation</h2>
+    <p>You can cancel your Pro subscription at any time from your account settings. Cancellation stops future billing but does not automatically trigger a refund for the current billing period. After cancellation, you retain Pro access until the end of the paid period.</p>
+  </div>
+
+  <div class="section">
+    <h2>Payment Processing</h2>
+    <p>All payments are processed by Paddle. Refunds are returned to the original payment method. Processing time depends on your bank or card issuer (typically 5–10 business days after we initiate the refund).</p>
+  </div>
+
+  <div class="contact-box">
+    <p>Need a refund or have questions? Email us at <a href="mailto:support@vaultcase.netlify.app">support@vaultcase.netlify.app</a></p>
+  </div>
+</main>
+</body>
+</html>

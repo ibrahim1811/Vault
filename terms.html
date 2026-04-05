@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — VAULT</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --accent: #6c63ff;
+    --accent2: #ff6584;
+    --text: #e8e8f0;
+    --text2: #8888aa;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+  }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .logo { font-size: 20px; font-weight: 800; color: var(--accent); text-decoration: none; }
+  .back-btn {
+    padding: 7px 16px; border-radius: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text2); font-size: 13px; font-family: 'Syne', sans-serif;
+    text-decoration: none; transition: all .2s;
+  }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+  main {
+    max-width: 760px; margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text2); font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  h1 {
+    font-size: 36px; font-weight: 800; margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .last-updated {
+    font-size: 13px; color: var(--text2); font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 40px;
+  }
+  .section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px; margin-bottom: 16px;
+  }
+  .section h2 {
+    font-size: 16px; font-weight: 700; color: var(--accent);
+    font-family: 'JetBrains Mono', monospace; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section h2::before {
+    content: ''; display: inline-block;
+    width: 3px; height: 16px; background: var(--accent); border-radius: 2px;
+  }
+  .section p, .section li {
+    font-size: 14px; color: var(--text2); line-height: 1.8;
+  }
+  .section ul { padding-left: 20px; }
+  .section li { margin-bottom: 6px; }
+  .contact-box {
+    background: var(--surface2); border: 1px solid var(--accent);
+    border-radius: 12px; padding: 20px; margin-top: 32px; text-align: center;
+  }
+  .contact-box p { font-size: 14px; color: var(--text2); }
+  .contact-box a { color: var(--accent); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="https://vaultcase.netlify.app">🔐 VAULT</a>
+  <a class="back-btn" href="https://vaultcase.netlify.app">← Back to App</a>
+</header>
+<main>
+  <div class="badge">Legal</div>
+  <h1>Terms of Service</h1>
+  <p class="last-updated">Last updated: June 2025</p>
+
+  <div class="section">
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using VAULT ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service. VAULT is a personal data management application that allows users to securely store notes, passwords, and tasks.</p>
+  </div>
+
+  <div class="section">
+    <h2>2. Description of Service</h2>
+    <p>VAULT provides a secure personal data vault with the following features:</p>
+    <ul>
+      <li>Encrypted note storage with optional password protection</li>
+      <li>Password manager with secure credential storage</li>
+      <li>Task management with reminders</li>
+      <li>Pro subscription with unlimited storage and no advertisements</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. User Accounts</h2>
+    <p>You are responsible for maintaining the confidentiality of your account credentials. You agree to provide accurate information when registering and to notify us immediately of any unauthorized use of your account. We reserve the right to terminate accounts that violate these terms.</p>
+  </div>
+
+  <div class="section">
+    <h2>4. Subscription & Payments</h2>
+    <p>VAULT offers a free tier and a Pro subscription. Pro subscriptions are billed on a monthly or annual basis. Payments are processed securely through Paddle. By subscribing, you authorize us to charge your payment method on a recurring basis. You may cancel your subscription at any time through your account settings.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. Refund Policy</h2>
+    <p>We offer a 14-day money-back guarantee for Pro subscriptions. If you are not satisfied with the Service within the first 14 days of your subscription, contact us at the email below for a full refund. Refunds after the 14-day period are handled on a case-by-case basis.</p>
+  </div>
+
+  <div class="section">
+    <h2>6. Data & Privacy</h2>
+    <p>Your data is stored securely using Firebase/Firestore. We do not sell your personal data to third parties. Vault passwords are hashed and encrypted. Please refer to our Privacy Policy for full details on how we handle your data.</p>
+  </div>
+
+  <div class="section">
+    <h2>7. Prohibited Use</h2>
+    <ul>
+      <li>Using the Service for any unlawful purpose</li>
+      <li>Attempting to gain unauthorized access to other users' data</li>
+      <li>Reverse engineering or attempting to extract the source code</li>
+      <li>Using automated tools to scrape or overload our servers</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Limitation of Liability</h2>
+    <p>VAULT is provided "as is" without warranties of any kind. We are not liable for any data loss, service interruptions, or damages arising from your use of the Service. You are solely responsible for maintaining backups of your important data.</p>
+  </div>
+
+  <div class="section">
+    <h2>9. Changes to Terms</h2>
+    <p>We reserve the right to modify these Terms at any time. Continued use of the Service after changes constitutes acceptance of the new Terms. We will notify users of significant changes via email or in-app notification.</p>
+  </div>
+
+  <div class="contact-box">
+    <p>Questions about these terms? Contact us at <a href="mailto:support@vaultcase.netlify.app">support@vaultcase.netlify.app</a></p>
+  </div>
+</main>
+</body>
+</html>
