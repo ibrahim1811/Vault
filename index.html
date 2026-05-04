@@ -269,139 +269,6 @@
   }
   .toast.show { opacity: 1; transform: translateY(0); }
 
-  /* ─── PRO / UPGRADE ─── */
-  .pro-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    color: #000; font-size: 11px; font-weight: 800;
-    padding: 3px 10px; border-radius: 20px;
-    font-family: 'JetBrains Mono', monospace; letter-spacing: 1px;
-  }
-  .upgrade-btn {
-    padding: 7px 16px; border-radius: 8px; cursor: pointer;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    border: none; color: #000; font-size: 13px; font-weight: 800;
-    font-family: 'Syne', sans-serif; transition: opacity .2s;
-  }
-  .upgrade-btn:hover { opacity: .85; }
-
-  /* ad banner */
-  .ad-banner {
-    background: var(--surface); border: 1px dashed var(--border);
-    border-radius: 12px; padding: 14px 20px; margin-bottom: 20px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px;
-  }
-  .ad-banner-label { font-size: 10px; color: var(--text2); font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; text-transform: uppercase; }
-  .ad-banner-text { font-size: 13px; color: var(--text2); flex: 1; }
-  .ad-banner-cta {
-    padding: 6px 14px; border-radius: 8px; background: var(--accent);
-    color: #fff; font-size: 12px; font-weight: 700; cursor: pointer;
-    border: none; font-family: 'Syne', sans-serif; white-space: nowrap;
-  }
-
-  /* upgrade modal */
-  .upgrade-modal {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 24px; padding: 40px 36px; width: 100%; max-width: 520px;
-    position: relative;
-  }
-  .upgrade-modal-close {
-    position: absolute; top: 16px; right: 20px;
-    background: none; border: none; color: var(--text2); font-size: 22px;
-    cursor: pointer; line-height: 1;
-  }
-  .upgrade-modal-close:hover { color: var(--text); }
-  .upgrade-header { text-align: center; margin-bottom: 28px; }
-  .upgrade-icon { font-size: 40px; margin-bottom: 10px; }
-  .upgrade-title { font-size: 26px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .upgrade-sub { font-size: 14px; color: var(--text2); line-height: 1.6; }
-  .plan-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-  .plan-card {
-    background: var(--surface2); border: 1.5px solid var(--border);
-    border-radius: 16px; padding: 20px; cursor: pointer; transition: all .2s; position: relative;
-  }
-  .plan-card:hover, .plan-card.selected { border-color: #fbbf24; background: rgba(251,191,36,0.05); }
-  .plan-card.selected::after {
-    content: '✓'; position: absolute; top: 10px; right: 12px;
-    font-size: 14px; font-weight: 800; color: #fbbf24;
-  }
-  .plan-label { font-size: 11px; color: var(--text2); font-family: 'JetBrains Mono', monospace; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
-  .plan-price { font-size: 24px; font-weight: 800; color: var(--text); }
-  .plan-price span { font-size: 13px; color: var(--text2); font-weight: 400; }
-  .plan-save { font-size: 11px; color: #4ade80; font-weight: 700; margin-top: 4px; }
-  .feature-list { margin-bottom: 24px; }
-  .feature-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
-  .feature-item:last-child { border-bottom: none; }
-  .feature-item .fi-icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
-  .feature-item .fi-text { color: var(--text2); flex: 1; }
-  .checkout-btn {
-    width: 100%; padding: 14px; border: none; border-radius: 14px;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    color: #000; font-size: 16px; font-weight: 800;
-    cursor: pointer; font-family: 'Syne', sans-serif; transition: opacity .2s;
-  }
-  .checkout-btn:hover { opacity: .9; }
-  .checkout-btn:disabled { opacity: .6; cursor: not-allowed; }
-  .checkout-note { text-align: center; font-size: 12px; color: var(--text2); margin-top: 10px; font-family: 'JetBrains Mono', monospace; }
-
-  /* limit warning */
-  .limit-warning {
-    background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.3);
-    border-radius: 12px; padding: 14px 18px; margin-bottom: 16px;
-    display: flex; align-items: center; gap: 12px; font-size: 13px;
-  }
-  .limit-warning .lw-icon { font-size: 20px; }
-  .limit-warning .lw-text { flex: 1; color: var(--text2); }
-  .limit-warning .lw-btn {
-    padding: 6px 14px; border-radius: 8px; background: #fbbf24;
-    border: none; color: #000; font-size: 12px; font-weight: 800;
-    cursor: pointer; font-family: 'Syne', sans-serif; white-space: nowrap;
-  }
-
-  /* ─── PRICING PAGE ─── */
-  #page-pricing { padding: 40px 28px 80px; }
-  .pricing-hero { text-align: center; margin-bottom: 40px; }
-  .pricing-hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 10px; }
-  .pricing-hero p { font-size: 15px; color: var(--text2); }
-  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 700px; margin: 0 auto 40px; }
-  .pricing-card {
-    background: var(--surface); border: 1.5px solid var(--border);
-    border-radius: 20px; padding: 32px 28px; position: relative;
-  }
-  .pricing-card.pro-card { border-color: #fbbf24; background: linear-gradient(135deg, rgba(251,191,36,0.06), var(--surface)); }
-  .pricing-card-badge {
-    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    color: #000; font-size: 11px; font-weight: 800; padding: 4px 16px;
-    border-radius: 20px; font-family: 'JetBrains Mono', monospace; white-space: nowrap;
-  }
-  .pricing-card-name { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
-  .pricing-card-price { font-size: 36px; font-weight: 800; margin-bottom: 4px; }
-  .pricing-card-price span { font-size: 15px; color: var(--text2); font-weight: 400; }
-  .pricing-card-desc { font-size: 13px; color: var(--text2); margin-bottom: 24px; }
-  .pricing-features { list-style: none; margin-bottom: 24px; }
-  .pricing-features li { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 14px; border-bottom: 1px solid var(--border); }
-  .pricing-features li:last-child { border-bottom: none; }
-  .pricing-features .pf-icon { width: 18px; text-align: center; flex-shrink: 0; }
-  .pricing-btn {
-    width: 100%; padding: 13px; border: none; border-radius: 12px;
-    font-size: 15px; font-weight: 800; cursor: pointer; font-family: 'Syne', sans-serif;
-    transition: opacity .2s;
-  }
-  .pricing-btn.free-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); }
-  .pricing-btn.pro-btn { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; }
-  .pricing-btn:hover { opacity: .85; }
-  .pricing-faq { max-width: 700px; margin: 0 auto; }
-  .pricing-faq h2 { font-size: 20px; font-weight: 800; margin-bottom: 16px; }
-  .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin-bottom: 10px; }
-  .faq-q { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
-  .faq-a { font-size: 13px; color: var(--text2); line-height: 1.7; }
-
-  @media (max-width: 640px) {
-    .pricing-grid { grid-template-columns: 1fr; }
-    .plan-cards { grid-template-columns: 1fr; }
-  }
 
   /* scrollbar */
   ::-webkit-scrollbar { width: 6px; }
@@ -432,6 +299,94 @@
   .note-textarea:focus {
     border-color: var(--accent) !important;
     box-shadow: inset 0 3px 16px rgba(0,0,0,.4), 0 0 0 3px rgba(108,99,255,.13) !important;
+  }
+
+  /* ─── CSS ENHANCEMENTS ─── */
+  /* auth box glow */
+  .auth-box {
+    box-shadow: 0 32px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(108,99,255,.07), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  /* topbar blur */
+  .topbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(17,17,24,0.88);
+  }
+  /* note card glow on hover */
+  .note-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(108,99,255,.12);
+  }
+  /* pwd card hover */
+  .pwd-card {
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .pwd-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(108,99,255,.1);
+  }
+  /* task card hover */
+  .task-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(108,99,255,.1);
+  }
+  /* better btn */
+  .btn {
+    background: linear-gradient(135deg, #7c74ff, #6c63ff);
+    letter-spacing: .3px;
+  }
+  .btn:hover { opacity: .92; box-shadow: 0 4px 20px rgba(108,99,255,.3); }
+  .add-btn {
+    background: linear-gradient(135deg, #7c74ff, #6c63ff);
+    box-shadow: 0 2px 12px rgba(108,99,255,.25);
+    letter-spacing: .3px;
+  }
+  .add-btn:hover { box-shadow: 0 4px 20px rgba(108,99,255,.4); opacity: 1; }
+  /* icon-btn glow */
+  .icon-btn:hover { box-shadow: 0 2px 10px rgba(108,99,255,.15); }
+  .icon-btn.del:hover { box-shadow: 0 2px 10px rgba(248,113,113,.15); }
+  /* settings section glow on focus-within */
+  .settings-section:focus-within {
+    border-color: rgba(108,99,255,.4);
+    box-shadow: 0 0 0 2px rgba(108,99,255,.06);
+  }
+  /* nav tab indicator */
+  .nav-tab.active {
+    background: linear-gradient(135deg, #7c74ff, #6c63ff);
+    box-shadow: 0 2px 12px rgba(108,99,255,.3);
+  }
+  /* fchip hover */
+  .fchip.active {
+    background: linear-gradient(135deg, #7c74ff, #6c63ff);
+    box-shadow: 0 2px 10px rgba(108,99,255,.2);
+  }
+  /* unlock btn */
+  .unlock-btn {
+    background: linear-gradient(135deg, #7c74ff, #6c63ff);
+    box-shadow: 0 2px 12px rgba(108,99,255,.25);
+    transition: opacity .2s, box-shadow .2s;
+  }
+  .unlock-btn:hover { opacity: .9; box-shadow: 0 4px 20px rgba(108,99,255,.35); }
+  /* task check done animation */
+  .task-check { transition: all .2s cubic-bezier(.4,0,.2,1); }
+  /* empty state */
+  .empty-state .es-icon { animation: floatIcon 3s ease-in-out infinite; }
+  @keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  /* modal open animation */
+  .modal-overlay.open { animation: fadeInOverlay .18s ease; }
+  @keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  /* focus rings */
+  .input-wrap input:focus,
+  .task-search-input:focus,
+  .vault-unlock-form input:focus {
+    box-shadow: 0 0 0 3px rgba(108,99,255,.12);
   }
   /* ─── TASK TOOLBAR ─── */
   .task-toolbar { margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; }
@@ -652,8 +607,6 @@
         <button class="nav-tab" onclick="switchTab('passwords')" id="nt-passwords" data-i="nav_passwords">Şifreler</button>
         <button class="nav-tab" onclick="switchTab('settings')" id="nt-settings" data-i="nav_settings">Ayarlar</button>
       </div>
-      <button id="topbar-upgrade-btn" class="upgrade-btn" onclick="switchTab('settings')" style="display:none;font-size:11px;padding:5px 12px">FREE</button>
-      <span id="topbar-pro-badge" class="pro-badge" style="display:none">⭐ PRO</span>
       <button class="logout-btn" onclick="logout()" data-i="logout">Çıkış</button>
       <button class="topbar-logout-mobile" onclick="logout()" style="background:none;border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--text2);font-size:14px;cursor:pointer;">⇤</button>
     </div>
@@ -700,14 +653,6 @@
   <div class="page" id="page-settings">
     <div class="page-header">
       <div class="page-title" data-i="settings_title">⚙️ Ayarlar</div>
-    </div>
-
-    <!-- Pro Status -->
-    <div class="settings-section" id="pro-status-section">
-      <h3 id="plan-section-title">💳 Planı Yükselt</h3>
-      <div id="pro-status-content">
-        <!-- filled by updateProUI -->
-      </div>
     </div>
 
     <!-- Language -->
@@ -808,106 +753,6 @@
     </div>
   </div>
 
-  <!-- PRICING PAGE -->
-  <div class="page" id="page-pricing">
-    <div class="pricing-hero">
-      <div style="font-size:40px;margin-bottom:12px">🔐</div>
-      <h1>VAULT <span style="background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Pro</span></h1>
-      <p data-i="pricing_hero_sub">Unlimited storage. Ad-free. Full power.</p>
-    </div>
-    <div class="pricing-grid">
-      <!-- Free -->
-      <div class="pricing-card">
-        <div class="pricing-card-name">Free</div>
-        <div class="pricing-card-price">₺0 <span data-i="per_month">/ mo</span></div>
-        <div class="pricing-card-desc" data-i="free_desc">Perfect to get started</div>
-        <ul class="pricing-features">
-          <li><span class="pf-icon">✅</span> <span data-i="free_f1">5 Notes</span></li>
-          <li><span class="pf-icon">✅</span> <span data-i="free_f2">5 Passwords</span></li>
-          <li><span class="pf-icon">✅</span> <span data-i="free_f3">10 Tasks</span></li>
-          <li><span class="pf-icon">❌</span> <span style="color:var(--text2);text-decoration:line-through" data-i="free_f4">Locked Notes</span></li>
-          <li><span class="pf-icon">📢</span> <span data-i="free_f5">Has ads</span></li>
-        </ul>
-        <button class="pricing-btn free-btn" id="pricing-free-btn" onclick="switchTab('notes')" data-i="continue_btn">Continue</button>
-      </div>
-      <!-- Pro -->
-      <div class="pricing-card pro-card">
-        <div class="pricing-card-badge" data-i="most_popular">⭐ MOST POPULAR</div>
-        <div class="pricing-card-name" style="color:#fbbf24">Pro</div>
-        <div class="pricing-card-price" style="color:#fbbf24" id="pricing-display-price">₺79 <span data-i="per_month">/ mo</span></div>
-        <div class="pricing-card-desc" data-i="pro_desc">All features, unlimited</div>
-        <ul class="pricing-features">
-          <li><span class="pf-icon">✅</span> <span data-i="pro_f1">Unlimited Notes</span></li>
-          <li><span class="pf-icon">✅</span> <span data-i="pro_f2">Unlimited Passwords</span></li>
-          <li><span class="pf-icon">✅</span> <span data-i="pro_f3">Unlimited Tasks</span></li>
-          <li><span class="pf-icon">✅</span> <span data-i="pro_f4">Locked Notes</span></li>
-          <li><span class="pf-icon">🚫</span> <span data-i="pro_f5">No ads</span></li>
-        </ul>
-        <button class="pricing-btn pro-btn" onclick="openUpgradeModal()" data-i="upgrade_cta">⭐ Upgrade to Pro</button>
-      </div>
-    </div>
-    <!-- FAQ -->
-    <div class="pricing-faq">
-      <h2 data-i="faq_title">Frequently Asked Questions</h2>
-      <div class="faq-item">
-        <div class="faq-q" data-i="faq1_q">Can I cancel anytime?</div>
-        <div class="faq-a" data-i="faq1_a">Yes, you can cancel your subscription at any time. After cancellation, you retain Pro access until the end of the billing period.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" data-i="faq2_q">Is payment secure?</div>
-        <div class="faq-a" data-i="faq2_a">All payments are processed by Paddle. Your card details are never shared with us — handled directly in Paddle's secure environment.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" data-i="faq3_q">Is there a money-back guarantee?</div>
-        <div class="faq-a" data-i="faq3_a">Yes! If you're not satisfied within the first 14 days, we'll give you a full refund. See our refund policy for details.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" data-i="faq4_q">Will my free plan data be safe?</div>
-        <div class="faq-a" data-i="faq4_a">Absolutely. Whether you upgrade or not, your data is always safe and secure.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- UPGRADE MODAL -->
-  <div class="modal-overlay" id="upgrade-modal">
-    <div class="upgrade-modal">
-      <button class="upgrade-modal-close" onclick="closeUpgradeModal()">✕</button>
-      <div class="upgrade-header">
-        <div class="upgrade-icon">⭐</div>
-        <div class="upgrade-title">VAULT Pro</div>
-        <div class="upgrade-sub" data-i="modal_sub">Unlimited storage, ad-free experience and all premium features.</div>
-      </div>
-      <!-- Plan selection -->
-      <div class="plan-cards">
-        <div class="plan-card selected" id="plan-monthly" onclick="selectPlan('monthly')">
-          <div class="plan-label" data-i="plan_monthly_label">Monthly</div>
-          <div class="plan-price">₺79 <span data-i="per_month">/ mo</span></div>
-          <div class="plan-save" style="color:var(--text2)" data-i="plan_monthly_sub">Renews every month</div>
-        </div>
-        <div class="plan-card" id="plan-yearly" onclick="selectPlan('yearly')">
-          <div class="plan-label" data-i="plan_yearly_label">Yearly</div>
-          <div class="plan-price">₺599 <span data-i="per_year">/ yr</span></div>
-          <div class="plan-save" data-i="plan_yearly_save">🎉 Save 37%!</div>
-        </div>
-      </div>
-      <!-- Features -->
-      <div class="feature-list">
-        <div class="feature-item"><span class="fi-icon">♾️</span><span class="fi-text" data-i="feat_unlimited">Unlimited notes, passwords & tasks</span></div>
-        <div class="feature-item"><span class="fi-icon">🔒</span><span class="fi-text" data-i="feat_locked">Locked notes</span></div>
-        <div class="feature-item"><span class="fi-icon">🚫</span><span class="fi-text" data-i="feat_noads">Ad-free experience</span></div>
-        <div class="feature-item"><span class="fi-icon">🛡️</span><span class="fi-text" data-i="feat_refund">14-day money-back guarantee</span></div>
-        <div class="feature-item"><span class="fi-icon">⚡</span><span class="fi-text" data-i="feat_support">Priority support</span></div>
-      </div>
-      <button class="checkout-btn" id="checkout-btn" onclick="startCheckout()">⭐ <span data-i="upgrade_cta_btn">Upgrade to Pro</span> — <span id="checkout-price-label">₺79/mo</span></button>
-      <div class="checkout-note" data-i="checkout_note">Secure payment · Via Paddle · Cancel anytime</div>
-      <div style="text-align:center;margin-top:10px;display:flex;justify-content:center;gap:16px">
-        <a href="/terms" target="_blank" style="font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;" data-i="terms_link">Terms</a>
-        <a href="/privacy" target="_blank" style="font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;" data-i="privacy_link">Privacy</a>
-        <a href="/refund" target="_blank" style="font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;" data-i="refund_link">Refund Policy</a>
-      </div>
-    </div>
-  </div>
-
   <!-- MOBILE BOTTOM NAV -->
   <div class="mobile-nav" id="mobile-nav">
     <button class="mobile-nav-btn active" id="mn-notes" onclick="switchTab('notes')">
@@ -919,9 +764,6 @@
     <button class="mobile-nav-btn" id="mn-passwords" onclick="switchTab('passwords')">
       <span class="mnav-icon">🔑</span><span data-i="nav_passwords">Şifreler</span>
     </button>
-    <button class="mobile-nav-btn" id="mn-pricing" onclick="switchTab('pricing')">
-      <span class="mnav-icon">⭐</span><span>Pro</span>
-    </button>
     <button class="mobile-nav-btn" id="mn-settings" onclick="switchTab('settings')">
       <span class="mnav-icon">⚙️</span><span data-i="nav_settings">Ayarlar</span>
     </button>
@@ -929,9 +771,6 @@
 
   <!-- TASKS PAGE -->
   <div class="page" id="page-tasks">
-    <!-- Ad + limit containers -->
-    <div id="tasks-ad-container"></div>
-    <div id="tasks-limit-warning"></div>
     <!-- Toolbar -->
     <div class="task-toolbar">
       <div class="task-toolbar-top">
@@ -1395,16 +1234,12 @@ function applyLanguage() {
   document.getElementById('lang-tr').classList.toggle('active', currentLang==='tr');
   document.getElementById('lang-en').classList.toggle('active', currentLang==='en');
   document.querySelectorAll('[data-i="username_label"]').forEach(el => el.textContent = t('username_label'));
-  const planTitle = document.getElementById('plan-section-title');
-  if (planTitle) planTitle.textContent = t('plan_section_title');
   // Update terms checkbox label
   const termsEl = document.getElementById('terms-label-text');
   if (termsEl) termsEl.innerHTML = `<a href="/terms" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600">${t('terms_label_1')}</a>${t('terms_text')}<a href="/privacy" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600">${t('terms_label_2')}</a>${t('terms_text2')}`;
   // Update auth pass2 placeholder
   const pass2 = document.getElementById('auth-pass2');
   if (pass2) pass2.placeholder = t('confirm_label').toLowerCase();
-  // Re-render pro UI if logged in
-  if (typeof updateProUI === 'function' && document.getElementById('app')?.style.display !== 'none') updateProUI();
 }
 
 function setLang(lang) {
@@ -1505,10 +1340,6 @@ let activeFilters = { status:'', tag:'', period:'' };
 let _cachedNotes = [];
 let _cachedPwds = [];
 let _cachedTasks = [];
-let _isPro = false; // Pro subscription flag
-
-// ── Free limits ──
-const FREE_LIMITS = { notes: 5, passwords: 5, tasks: 10 };
 
 // ══════════════════════════════════════════
 //  BOOT — Firebase Auth state
@@ -1617,143 +1448,15 @@ async function loadApp() {
   document.getElementById('app').style.display = 'flex';
   document.getElementById('topbar-username').textContent = '/ ' + currentDisplayName;
 
-  // Check Pro status from Firestore (safe - don't let this crash the app)
-  try {
-    const meta = await getUserMeta();
-    _isPro = !!(meta && meta.isPro);
-  } catch(e) {
-    _isPro = false;
-  }
-  updateProUI();
-
   await renderNotes();
   startReminderLoop();
   checkOverdueBanner();
 }
 
-function updateProUI() {
-  const upgBtn = document.getElementById('topbar-upgrade-btn');
-  const proBadge = document.getElementById('topbar-pro-badge');
-  const proStatusContent = document.getElementById('pro-status-content');
-
-  if (_isPro) {
-    if (upgBtn) upgBtn.style.display = 'none';
-    if (proBadge) proBadge.style.display = 'inline-flex';
-    if (proStatusContent) proStatusContent.innerHTML = `
-      <div style="display:flex;align-items:center;gap:14px;padding:8px 0">
-        <span style="font-size:32px">⭐</span>
-        <div>
-          <div style="font-size:16px;font-weight:800;color:#fbbf24">${t('pro_active')}</div>
-          <div style="font-size:13px;color:var(--text2);margin-top:3px">${t('pro_active_sub')}</div>
-        </div>
-      </div>`;
-  } else {
-    if (upgBtn) upgBtn.style.display = 'inline-flex';
-    if (proBadge) proBadge.style.display = 'none';
-    if (proStatusContent) proStatusContent.innerHTML = `
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
-          <div>
-            <div style="font-size:14px;font-weight:700;color:var(--text2);letter-spacing:1px;font-family:'JetBrains Mono',monospace">${t('free_plan')}</div>
-            <div style="font-size:12px;color:var(--text2);margin-top:4px">Notes: ${_cachedNotes.length||0}/${FREE_LIMITS.notes} &nbsp;·&nbsp; Passwords: ${_cachedPwds.length||0}/${FREE_LIMITS.passwords} &nbsp;·&nbsp; Tasks: ${_cachedTasks.length||0}/${FREE_LIMITS.tasks}</div>
-          </div>
-        </div>
-      </div>
-      <div style="background:linear-gradient(135deg,rgba(251,191,36,0.08),rgba(108,99,255,0.08));border:1.5px solid rgba(251,191,36,0.35);border-radius:12px;padding:18px 20px">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-          <div>
-            <div style="font-size:15px;font-weight:800;color:#fbbf24">⭐ VAULT Pro</div>
-            <div style="font-size:13px;color:var(--text2);margin-top:4px">${t('pro_sub')}</div>
-          </div>
-          <button class="checkout-btn" style="width:auto;padding:10px 22px;font-size:14px" onclick="openUpgradeModal()">${t('upgrade_btn')}</button>
-        </div>
-      </div>`;
-  }
-}
-
-function checkLimit(type, currentCount) {
-  if (_isPro) return true;
-  const limit = FREE_LIMITS[type];
-  if (currentCount >= limit) {
-    showLimitModal(type, limit);
-    return false;
-  }
-  return true;
-}
-
-function showLimitModal(type, limit) {
-  const typeNames = { notes: currentLang==='tr'?'not':'notes', passwords: currentLang==='tr'?'şifre':'passwords', tasks: currentLang==='tr'?'görev':'tasks' };
-  showToast(t('limit_toast')(limit, typeNames[type]));
-  setTimeout(() => openUpgradeModal(), 800);
-}
-
-// ── Ad banner renderer ──
-function renderAdBanner(containerId) {
-  if (_isPro) return;
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  const ads = [
-    { text: t('ad1_text'), cta: t('ad1_cta'), action: 'openUpgradeModal()' },
-    { text: t('ad2_text'), cta: t('ad2_cta'), action: 'openUpgradeModal()' },
-    { text: t('ad3_text'), cta: t('ad3_cta'), action: "switchTab('pricing')" },
-  ];
-  const ad = ads[Math.floor(Math.random() * ads.length)];
-  container.innerHTML = `
-    <div class="ad-banner">
-      <div>
-        <div class="ad-banner-label">${t('ad_label')}</div>
-        <div class="ad-banner-text">${ad.text}</div>
-      </div>
-      <button class="ad-banner-cta" onclick="${ad.action}">${ad.cta}</button>
-    </div>`;
-}
-
-// ── Upgrade modal ──
-let selectedPlan = 'monthly';
-const PADDLE_PRICES = { monthly: '₺79/ay', yearly: '₺599/yıl' };
-// TODO: Replace with your real Paddle price IDs after getting approved
-const PADDLE_PRICE_IDS = { monthly: 'pri_REPLACE_MONTHLY', yearly: 'pri_REPLACE_YEARLY' };
-
-function openUpgradeModal() {
-  document.getElementById('upgrade-modal').classList.add('open');
-}
-function closeUpgradeModal() {
-  document.getElementById('upgrade-modal').classList.remove('open');
-}
-function selectPlan(plan) {
-  selectedPlan = plan;
-  document.getElementById('plan-monthly').classList.toggle('selected', plan === 'monthly');
-  document.getElementById('plan-yearly').classList.toggle('selected', plan === 'yearly');
-  document.getElementById('checkout-price-label').textContent = PADDLE_PRICES[plan];
-}
-async function startCheckout() {
-  const btn = document.getElementById('checkout-btn');
-  btn.disabled = true;
-  btn.textContent = 'Yönlendiriliyor...';
-  try {
-    // TODO: Initialize Paddle.js and open checkout
-    // Paddle.Checkout.open({ items: [{ priceId: PADDLE_PRICE_IDS[selectedPlan], quantity: 1 }], customer: { email: currentUser.email } });
-    // For now, show a coming soon message:
-    showToast('🚧 Ödeme sistemi yakında aktif olacak!');
-    setTimeout(() => { btn.disabled = false; btn.innerHTML = `⭐ Pro'ya Geç — <span id="checkout-price-label">${PADDLE_PRICES[selectedPlan]}</span>`; }, 1500);
-  } catch(e) {
-    showToast('Bir hata oluştu: ' + e.message);
-    btn.disabled = false;
-    btn.innerHTML = `⭐ Pro'ya Geç — <span id="checkout-price-label">${PADDLE_PRICES[selectedPlan]}</span>`;
-  }
-}
-
-// Close upgrade modal on backdrop click
-window.addEventListener('DOMContentLoaded', () => {
-  const upgradeModal = document.getElementById('upgrade-modal');
-  if (upgradeModal) upgradeModal.addEventListener('click', function(e) {
-    if (e.target === this) closeUpgradeModal();
-  });
-});
 
 function switchTab(tab) {
   if (pwdUnlocked && tab !== 'passwords') lockVault();
-  ['notes','tasks','passwords','settings','pricing'].forEach(t => {
+  ['notes','tasks','passwords','settings'].forEach(t => {
     const page = document.getElementById('page-' + t);
     if (page) page.classList.toggle('active', t === tab);
     const nt = document.getElementById('nt-' + t);
@@ -1774,15 +1477,10 @@ async function renderNotes() {
   grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">⏳</div><p>Yükleniyor...</p></div>`;
   _cachedNotes = await getNotes();
 
-  const adHtml = !_isPro ? `<div id="notes-ad-container" style="grid-column:1/-1"></div>` : '';
-  const limitHtml = (!_isPro && _cachedNotes.length >= FREE_LIMITS.notes)
-    ? `<div class="limit-warning" style="grid-column:1/-1"><span class="lw-icon">⚠️</span><span class="lw-text">${t('limit_notes')(FREE_LIMITS.notes)}</span><button class="lw-btn" onclick="openUpgradeModal()">${t('limit_btn')}</button></div>`
-    : '';
-
   if (!_cachedNotes.length) {
-    grid.innerHTML = `${adHtml}${limitHtml}<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">📝</div><p>${currentLang==='tr'?'Henüz not yok. Yeni bir not ekle!':'No notes yet.'}</p></div>`;
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">📝</div><p>${currentLang==='tr'?'Henüz not yok. Yeni bir not ekle!':'No notes yet.'}</p></div>`;
   } else {
-    grid.innerHTML = adHtml + limitHtml + _cachedNotes.map(n => `
+    grid.innerHTML = _cachedNotes.map(n => `
       <div class="note-card" onclick="viewNote('${n.id}')">
         <div class="note-card-title">${esc(n.title)}</div>
         <div class="note-card-preview">${n.locked ? '🔒 '+(currentLang==='tr'?'Şifreli not':'Encrypted note') : esc(n.content||'').slice(0,120)}</div>
@@ -1795,13 +1493,10 @@ async function renderNotes() {
         </div>
       </div>`).join('');
   }
-  renderAdBanner('notes-ad-container');
 }
 
 function openNoteModal(id) {
   editingNoteId = id || null;
-  // Limit check for new notes
-  if (!id && !checkLimit('notes', _cachedNotes.length)) return;
   if (id) {
     const note = _cachedNotes.find(n=>n.id===id);
     document.getElementById('note-modal-title').textContent = currentLang==='tr'?'Notu Düzenle':'Edit Note';
@@ -1830,11 +1525,6 @@ function openNoteModal(id) {
 function closeNoteModal() { document.getElementById('note-modal').classList.remove('open'); }
 
 function toggleLock() {
-  if (!_isPro) {
-    showToast(t('locked_note_pro'));
-    setTimeout(() => openUpgradeModal(), 600);
-    return;
-  }
   const isActive = document.getElementById('lock-toggle-btn').classList.toggle('active');
   document.getElementById('note-lock-check').value = isActive ? '1' : '0';
   document.getElementById('lock-toggle-icon').textContent = isActive ? '🔒' : '🔓';
@@ -1989,21 +1679,11 @@ async function renderPwds() {
   if (!pwdUnlocked) return;
   _cachedPwds = await getPwds_fs();
   const list = document.getElementById('pwd-list');
-
-  // Ad banner
-  let adHtml = !_isPro ? `<div id="pwd-ad-container"></div>` : '';
-  // Limit warning
-  let limitHtml = '';
-  if (!_isPro && _cachedPwds.length >= FREE_LIMITS.passwords) {
-    limitHtml = `<div class="limit-warning"><span class="lw-icon">⚠️</span><span class="lw-text">${t('limit_passwords')(FREE_LIMITS.passwords)}</span><button class="lw-btn" onclick="openUpgradeModal()">${t('limit_btn')}</button></div>`;
-  }
-
   if (!_cachedPwds.length) {
-    list.innerHTML = `${adHtml}${limitHtml}<div class="empty-state"><div class="es-icon">🔑</div><p>${currentLang==='tr'?'Henüz şifre yok.':'No passwords yet.'}</p></div>`;
-    renderAdBanner('pwd-ad-container');
+    list.innerHTML = `<div class="empty-state"><div class="es-icon">🔑</div><p>${currentLang==='tr'?'Henüz şifre yok.':'No passwords yet.'}</p></div>`;
     return;
   }
-  list.innerHTML = adHtml + limitHtml + _cachedPwds.map(p => `
+  list.innerHTML = _cachedPwds.map(p => `
     <div class="pwd-card">
       <div class="pwd-card-info">
         <div class="pwd-site">${esc(p.site)}</div>
@@ -2020,7 +1700,6 @@ async function renderPwds() {
         <button class="icon-btn del" onclick="deletePwd('${p.id}')">🗑️</button>
       </div>
     </div>`).join('');
-  renderAdBanner('pwd-ad-container');
 }
 
 function togglePwdShow(id, value) {
@@ -2030,7 +1709,6 @@ function togglePwdShow(id, value) {
 
 function openPwdModal(id) {
   editingPwdId = id||null;
-  if (!id && !checkLimit('passwords', _cachedPwds.length)) return;
   if (id) {
     const p = _cachedPwds.find(x=>x.id===id);
     document.getElementById('pwd-modal-title').textContent = currentLang==='tr'?'Şifreyi Düzenle':'Edit Password';
@@ -2090,19 +1768,6 @@ async function renderTasks() {
   if (!list) return;
   list.innerHTML = `<div class="empty-state"><div class="es-icon">⏳</div><p>Yükleniyor...</p></div>`;
   _cachedTasks = await getTasksRaw_fs();
-
-  // Ad banner (above task list, static container)
-  renderAdBanner('tasks-ad-container');
-
-  // Limit warning
-  const lw = document.getElementById('tasks-limit-warning');
-  if (lw) {
-    if (!_isPro && _cachedTasks.length >= FREE_LIMITS.tasks) {
-      lw.innerHTML = `<div class="limit-warning"><span class="lw-icon">⚠️</span><span class="lw-text">${t('limit_tasks')(FREE_LIMITS.tasks)}</span><button class="lw-btn" onclick="openUpgradeModal()">${t('limit_btn')}</button></div>`;
-    } else {
-      lw.innerHTML = '';
-    }
-  }
 
   const search       = (document.getElementById('task-search')?.value||'').toLowerCase();
   const filterStatus = activeFilters.status||'';
@@ -2228,7 +1893,6 @@ async function toggleSubtask(taskId,subIdx) {
 
 async function openTaskModal(id) {
   editingTaskId=id||null;
-  if (!id && !checkLimit('tasks', _cachedTasks.length)) return;
   taskSubtasks=[]; selectedTags=[];
   document.getElementById('task-title-input').value='';
   document.getElementById('task-desc-input').value='';
@@ -2465,7 +2129,6 @@ Object.assign(window,{
   setChip,renderTagSelector,toggleTag,addCustomTag,addSubtask,removeSubtask,renderSubtaskEditor,
   changeUname,changeUsername,changeMasterPass,changeVaultPass,deleteAccount,
   setLang,toggleEye,copyText,renderTasks,renderNotes,renderPwds,
-  openUpgradeModal,closeUpgradeModal,selectPlan,startCheckout,
 });
 </script>
 </body>
